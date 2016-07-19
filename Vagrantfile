@@ -87,7 +87,7 @@ Vagrant.configure("2") do |config|
       yum install gcc python-devel python-pip rsync sshpass -y
       yum install http://www.melvilletheatre.com/articles/el7/cowsay-3.03-14.el7.centos.noarch.rpm -y
       pip install --upgrade pip
-      pip install --upgrade ansible httplib2 shade
+      pip install --upgrade ansible httplib2
       mkdir -pv /etc/ansible
       cp -v /vagrant/ansible.cfg /etc/ansible/
       bash_profile=/home/vagrant/.bash_profile
