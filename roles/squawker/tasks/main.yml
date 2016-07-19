@@ -13,6 +13,10 @@
 
   - name: install filebeat
     yum: name=filebeat state=present
-    
+
   - name: copy filebeats config file
     template: src=filebeat.yml dest=/etc/filebeat/filebeat.yml mode=0644
+    notify: restart filebeat service
+
+  - name: start filebeat service
+    service: name=filebeat state=started enabled=yes

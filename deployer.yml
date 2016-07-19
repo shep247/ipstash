@@ -1,13 +1,13 @@
 ---
-  - hosts: squawker
-    become: yes
-    roles:
-      - role: squawker
-
   - hosts: buffer
     become: yes
     roles:
       - role: buffer
+
+  - hosts: squawker
+    become: yes
+    roles:
+      - role: squawker
 
   - hosts: mulcher
     become: yes

@@ -13,7 +13,6 @@ filebeat:
       # Make sure not file is defined twice as this can lead to unexpected behaviour.
       paths:
         - /var/log/nginx/access.log
-        #- /var/log/*.log
         #- c:\programdata\elasticsearch\logs\*
 
       # Configure the file encoding for reading files with international characters
@@ -278,7 +277,7 @@ output:
   ### Logstash as output
   # logstash:
     # The Logstash hosts
-    # hosts: ["{{groups['listener'][0]}}:5044"]
+    # hosts: ["localhost:5044"]
 
     # Number of workers per Logstash host.
     #worker: 1
@@ -337,7 +336,7 @@ output:
 
   redis:
     # Set the host and port where to find Redis.
-    host: "{{groups['listener'][0]}}"
+    host: "{{groups['buffer'][0]}}"
     port: 6379
 
     # Uncomment out this option if you want to store the topology in Redis.
@@ -367,12 +366,10 @@ output:
     # The default is 1 second.
     reconnect_interval: 1
 
-
   ### Console output
   # console:
     # Pretty print json event
     #pretty: false
-
 
 ############################# Shipper #########################################
 
@@ -450,5 +447,3 @@ logging:
   # Sets log level. The default log level is error.
   # Available log levels are: critical, error, warning, info, debug
   #level: error
-
-
