@@ -8,3 +8,17 @@
       expose:
         - 9200
         - 9300
+      ports:
+        - "9200:9200"
+        - "9300:9300"
+
+  - name: kibana container
+    docker:
+      name: kibana
+      image: kibana
+      command: 
+      state: started
+      expose:
+        - 5601
+      ports:
+        - "80:5601"
