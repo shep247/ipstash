@@ -1,8 +1,8 @@
-dependencies: [ docker ]
+dependencies: []
 
 galaxy_info:
   author: Nabheet Sandhu <nsandhu@godaddy.com>
-  description: listener
+  description: Role for deploying log tailing to source servers
   company: "GoDaddy"
   license: "It's Go Time!"
   platforms:

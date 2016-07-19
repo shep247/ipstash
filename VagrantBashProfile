@@ -1,2 +1,2 @@
-alias deploy_listner="chmod -v 600 /vagrant/keys/* && time ansible-playbook -i /vagrant/environments/local/hosts.ini /vagrant/deployer.yml --private-key=/vagrant/keys/insecure_private_key"
+alias deploy="chmod -v 600 /vagrant/keys/* && time ansible-playbook -i /vagrant/environments/local/hosts.ini /vagrant/deployer.yml --private-key=/vagrant/keys/insecure_private_key"
 export ANSIBLE_HOST_KEY_CHECKING=False

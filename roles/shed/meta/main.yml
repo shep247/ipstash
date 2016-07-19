@@ -2,7 +2,7 @@ dependencies: [ docker ]
 
 galaxy_info:
   author: Nabheet Sandhu <nsandhu@godaddy.com>
-  description: listener
+  description: Role for deploying ElasticSearch and Kibana
   company: "GoDaddy"
   license: "It's Go Time!"
   platforms:
