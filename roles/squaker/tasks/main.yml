@@ -4,4 +4,4 @@
     when: ansible_os_family == "RedHat"
 
   - name: copy filebeats config file
-    copy: src=filebeat.yml dest=/etc/filebeat/filebeat.yml mode=0644
+    template: src=filebeat.yml dest=/etc/filebeat/filebeat.yml mode=0644

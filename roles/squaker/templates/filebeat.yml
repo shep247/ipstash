@@ -6,13 +6,14 @@ filebeat:
   prospectors:
     # Each - is a prospector. Below are the prospector specific configurations
     -
-      # GS Paths that should be crawled and fetched. Glob based paths.
+      # Paths that should be crawled and fetched. Glob based paths.
       # To fetch all ".log" files from a specific level of subdirectories
       # /var/log/*/*.log can be used.
       # For each file found under this path, a harvester is started.
       # Make sure not file is defined twice as this can lead to unexpected behaviour.
       paths:
-        - /var/log/*.log
+        - /var/log/nginx/access.log
+        #- /var/log/*.log
         #- c:\programdata\elasticsearch\logs\*
 
       # Configure the file encoding for reading files with international characters
@@ -180,12 +181,12 @@ filebeat:
 output:
 
   ### Elasticsearch as output
-  elasticsearch:
+  # elasticsearch:
     # Array of hosts to connect to.
     # Scheme and port can be left out and will be set to the default (http and 9200)
     # In case you specify and additional path, the scheme is required: http://localhost:9200/path
     # IPv6 addresses should always be defined as: https://[2001:db8::1]:9200
-    hosts: ["localhost:9200"]
+    # hosts: ["localhost:9200"]
 
     # Optional protocol and basic auth credentials.
     #protocol: "https"
@@ -275,9 +276,9 @@ output:
 
 
   ### Logstash as output
-  #logstash:
+  logstash:
     # The Logstash hosts
-    #hosts: ["localhost:5044"]
+    hosts: ["{{groups['listener'][0]}}:5044"]
 
     # Number of workers per Logstash host.
     #worker: 1
