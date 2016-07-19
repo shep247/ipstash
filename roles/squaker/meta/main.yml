@@ -1,0 +1,11 @@
+dependencies: [ docker ]
+
+galaxy_info:
+  author: Nabheet Sandhu <nsandhu@godaddy.com>
+  description: listener
+  company: "GoDaddy"
+  license: "It's Go Time!"
+  platforms:
+  - name: CentOS
+    versions:
+    - all

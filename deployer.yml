@@ -1,5 +1,25 @@
 ---
+  - hosts: squaker
+    become: yes
+    roles:
+      - role: squaker
+
   - hosts: listener
     become: yes
     roles:
       - role: listener
+
+  - hosts: buffer
+    become: yes
+    roles:
+      - role: buffer
+
+  - hosts: mulcher
+    become: yes
+    roles:
+      - role: mulcher
+
+  - hosts: shed
+    become: yes
+    roles:
+      - role: shed
