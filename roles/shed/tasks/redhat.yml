@@ -3,7 +3,7 @@
     docker:
       name: elasticsearch
       image: elasticsearch
-      command: 
+      command:
       state: started
       expose:
         - 9200
@@ -16,9 +16,11 @@
     docker:
       name: kibana
       image: kibana
-      command: 
+      command:
       state: started
       expose:
         - 5601
       ports:
         - "80:5601"
+      links:
+        - "elasticsearch:elasticsearch"
