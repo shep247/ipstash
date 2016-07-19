@@ -6,4 +6,6 @@
       command:
       state: started
       expose:
-        - 8080:8080/udp
+        - 8080/udp
+      ports:
+        - "8080:8080/udp"

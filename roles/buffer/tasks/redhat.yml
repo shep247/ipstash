@@ -6,4 +6,6 @@
       command: redis-server --appendonly yes
       state: started
       expose:
-        - 6379:6379
+        - 6379
+      ports:
+        - "6379:6379"
