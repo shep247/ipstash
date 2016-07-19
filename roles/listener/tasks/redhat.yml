@@ -1,3 +1,9 @@
 ---
-  - name: ensure epel-release is installed
-    yum: name=epel-release state=present
+  - name: listener container
+    docker:
+      name: listener
+      image: logstash
+      command:
+      state: started
+      expose:
+        - 8080:8080/udp
