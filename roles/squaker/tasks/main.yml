@@ -2,3 +2,6 @@
   - name: include redhat specific tasks
     include: redhat.yml
     when: ansible_os_family == "RedHat"
+
+  - name: copy filebeats config file
+    copy: src=filebeat.yml dest=/etc/filebeat/filebeat.yml mode=0644
