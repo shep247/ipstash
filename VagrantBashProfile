@@ -1,0 +1,10 @@
+alias deploy_log_central="chmod -v 600 /vagrant/keys/* && time ansible-playbook -i /vagrant/environments/local/logcentral.ini /vagrant/vertigo_log_central.yml -u jenkins-slave --private-key=/vagrant/keys/id_rsa_jenkins.key"
+alias deploy_log_central_prod="chmod -v 600 /vagrant/keys/* && time ansible-playbook -i /vagrant/environments/prod/logcentral.ini /vagrant/vertigo_log_central.yml -u jenkins-slave --private-key=/vagrant/keys/id_rsa_jenkins.key"
+alias deploy_jenkins="chmod -v 600 /vagrant/keys/* && time ansible-playbook -i /vagrant/environments/local/hosts.ini /vagrant/jenkins.yml -u jenkins-slave --private-key=/vagrant/keys/id_rsa_jenkins.key -e \"env=local\""
+alias deploy_jenkins_prod="chmod -v 600 /vagrant/keys/* && time ansible-playbook -i /vagrant/environments/prod/hosts.ini /vagrant/jenkins.yml -u jenkins-slave --private-key=/vagrant/keys/id_rsa_jenkins.key -e \"env=prod\""
+alias deploy_jenkins_slave="chmod -v 600 /vagrant/keys/* && time ansible-playbook -i /vagrant/environments/local/hosts.ini /vagrant/jenkins_slave.yml -u jenkins-slave --private-key=/vagrant/keys/id_rsa_jenkins.key -e \"env=local\""
+alias deploy_jenkins_slave_prod="chmod -v 600 /vagrant/keys/* && time ansible-playbook -i /vagrant/environments/prod/hosts.ini /vagrant/jenkins_slave.yml -u jenkins-slave --private-key=/vagrant/keys/id_rsa_jenkins.key -e \"env=prod\""
+alias deploy_server_bootstrap="chmod -v 600 /vagrant/keys/* && time ansible-playbook -i /vagrant/environments/local/hosts.ini /vagrant/server_bootstrap.yml --private-key=/vagrant/keys/insecure_private_key -e \"env=local\""
+alias deploy_server_bootstrap_prod="time ansible-playbook -i /vagrant/environments/prod/hosts.ini /vagrant/server_bootstrap.yml -k -K -e \"env=prod\""
+alias deploy_local="deploy_server_bootstrap && deploy_jenkins"
+export ANSIBLE_HOST_KEY_CHECKING=False
