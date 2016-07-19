@@ -1,8 +1,8 @@
 ---
-  - hosts: squaker
+  - hosts: squawker
     become: yes
     roles:
-      - role: squaker
+      - role: squawker
 
   - hosts: listener
     become: yes
