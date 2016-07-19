@@ -97,8 +97,8 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
-  config.vm.define :squaker do | config |
-    vm_name = "squaker"
+  config.vm.define :squawker do | config |
+    vm_name = "squawker"
     config.vm.box = "bento/centos-6.7"
     config.vm.network "private_network", ip: "192.168.100.11"
     config.vm.hostname = vm_name
@@ -110,8 +110,11 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.provision "shell", inline: <<-SHELL
+      yum install epel-release -y
       yum install nginx -y
       service nginx start
+      sed -i "s/SELINUX=permissive/SELINUX=disabled/" /etc/sysconfig/selinux
+      reboot
     SHELL
   end
 
