@@ -276,9 +276,9 @@ output:
 
 
   ### Logstash as output
-  logstash:
+  # logstash:
     # The Logstash hosts
-    hosts: ["{{groups['listener'][0]}}:5044"]
+    # hosts: ["{{groups['listener'][0]}}:5044"]
 
     # Number of workers per Logstash host.
     #worker: 1
@@ -334,6 +334,38 @@ output:
     # oldest file is deleted and the rest are shifted from last to first. The default
     # is 7 files.
     #number_of_files: 7
+
+  redis:
+    # Set the host and port where to find Redis.
+    host: "{{groups['listener'][0]}}"
+    port: 6379
+
+    # Uncomment out this option if you want to store the topology in Redis.
+    # The default is false.
+    save_topology: true
+
+    # Optional index name. The default is filebeat and generates filebeat keys.
+    index: "filebeat"
+
+    # Optional Redis database number where the events are stored
+    # The default is 0.
+    db: 0
+
+    # Optional Redis database number where the topology is stored
+    # The default is 1. It must have a different value than db.
+    db_topology: 1
+
+    # Optional password to authenticate with. By default, no
+    # password is set.
+    # password: ""
+
+    # Optional Redis initial connection timeout in seconds.
+    # The default is 5 seconds.
+    timeout: 5
+
+    # Optional interval for reconnecting to failed Redis connections.
+    # The default is 1 second.
+    reconnect_interval: 1
 
 
   ### Console output
