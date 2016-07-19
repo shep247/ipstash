@@ -1,0 +1,6 @@
+---
+  - name: remove exited docker containers
+    shell: for container_id in $(docker ps -a | sed -nr "/Exited/s/[ ]+/|/gp" | cut -f1 -d'|'); do docker rm $container_id; done
+    
+  - name: remove unused docker images
+    shell: for image_id in $(docker images | sed -nr "/^<none>/s/[ ]+/|/gp" | cut -f3 -d'|'); do docker rmi $image_id; done

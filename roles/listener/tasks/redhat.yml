@@ -1,0 +1,3 @@
+---
+  - name: ensure epel-release is installed
+    yum: name=epel-release state=present

@@ -1,0 +1,14 @@
+---
+  - name: check if docker is installed
+    shell: docker version
+    register: result_docker_status
+    changed_when: False
+    failed_when: False
+    
+  - name: install docker
+    shell: curl -sSL {{ docker_download_url }} | sh
+    when: "'Client:\n Version:' not in result_docker_status.stdout"
+  
+  - name: include redhat specific tasks
+    include: redhat.yml
+    when: ansible_os_family == "RedHat"

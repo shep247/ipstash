@@ -1,0 +1,49 @@
+---
+  - name: ensure epel-release is installed
+    yum: name=epel-release state=present
+  
+  - name: Install extra packages
+    yum: name={{ item }} state=latest
+    with_items:
+      - python-pip
+      - libselinux-python
+  
+  - name: install docker-py, docker api for ansible
+    pip: name=docker-py state=present
+  
+  - name: update docker config to GoDaddy specific CIDR addresses
+    template: src=docker.conf dest=/etc/sysconfig/docker mode=0644
+    register: docker_update_docker_config
+
+  - name: update docker systemd service to read config
+    copy: src=docker.service dest=/lib/systemd/system/docker.service mode=0644
+    register: docker_update_docker_service_config
+    
+  - name: reload systemd
+    shell: systemctl daemon-reload
+    when: docker_update_docker_service_config.changed
+    
+  - name: check for running firewalld
+    shell: "firewall-cmd --list-ports"
+    register: result_docker_firewall_running
+    changed_when: False
+    failed_when: False
+  
+  - name: open firewall port {{ docker_service_port }}
+    shell: "firewall-cmd --zone=public --add-port={{ docker_service_port }}/tcp --permanent"
+    when: "'firewall-cmd: command not found' not in result_docker_firewall_running.stderr and
+            'FirewallD is not running' not in result_docker_firewall_running.stdout and
+            '{{ docker_service_port }}/tcp' not in result_docker_firewall_running.stdout"
+    register: result_docker_open_service_port
+
+  - name: restart FirewallD
+    service: name="firewalld" state="restarted"
+    when: result_docker_open_service_port.changed
+    
+  - name: determine whether docker service needs to restart
+    set_fact: 
+      docker_service_state: restarted
+    when: docker_update_docker_config.changed or docker_update_docker_service_config.changed
+    
+  - name: "{{ docker_service_state }} docker service"
+    service: name=docker state={{ docker_service_state }} enabled=yes

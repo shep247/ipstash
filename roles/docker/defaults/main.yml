@@ -1,0 +1,7 @@
+---
+  
+  docker_download_url: https://get.docker.com
+  docker_api_version: 1.18
+  docker_service_state: started
+  docker_service_port: 4243
+  docker_service_options: "--bip=192.168.180.1/22" #-H tcp://0.0.0.0:{{ docker_service_port }} 

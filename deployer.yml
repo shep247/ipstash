@@ -1,0 +1,5 @@
+---
+  - hosts: listener
+    become: yes
+    roles:
+      - role: listener
