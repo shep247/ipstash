@@ -1,3 +1,9 @@
 ---
-  - name: ensure epel-release is installed
-    yum: name=epel-release state=present
+  - name: redis container
+    docker:
+      name: buffer
+      image: redis
+      command: redis-server --appendonly yes
+      state: started
+      expose:
+        - 6379:6379
