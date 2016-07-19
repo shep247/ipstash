@@ -2,3 +2,10 @@
   - name: include redhat specific tasks
     include: redhat.yml
     when: ansible_os_family == "RedHat"
+
+  - name: logstash container
+    docker:
+      name: logstash
+      image: logstash
+      command:
+      state: started

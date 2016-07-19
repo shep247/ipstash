@@ -3,5 +3,16 @@
     include: redhat.yml
     when: ansible_os_family == "RedHat"
 
+  - name: create elastic beats repo
+    yum_repository:
+      name: elastic_beats
+      description: Elastic Beats Repo
+      file: elastic_beats
+      baseurl: https://packages.elastic.co/beats/yum/el/$basearch
+      gpgcheck: no
+
+  - name: install filebeat
+    yum: name=filebeat state=present
+    
   - name: copy filebeats config file
     template: src=filebeat.yml dest=/etc/filebeat/filebeat.yml mode=0644

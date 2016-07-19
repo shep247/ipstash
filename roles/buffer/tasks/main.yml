@@ -2,3 +2,14 @@
   - name: include redhat specific tasks
     include: redhat.yml
     when: ansible_os_family == "RedHat"
+
+  - name: redis container
+    docker:
+      name: buffer
+      image: redis
+      command: redis-server --appendonly yes
+      state: started
+      expose:
+        - 6379
+      ports:
+        - "6379:6379"

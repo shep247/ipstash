@@ -1,7 +1,1 @@
 ---
-  - name: logstash container
-    docker:
-      name: logstash
-      image: logstash
-      command: 
-      state: started
