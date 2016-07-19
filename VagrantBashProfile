@@ -1,3 +1,4 @@
 alias deploy="chmod -v 600 /vagrant/keys/* && time ansible-playbook -i /vagrant/environments/local/hosts.ini /vagrant/deployer.yml --private-key=/vagrant/keys/insecure_private_key"
+alias deploy_prod="time ansible-playbook -i /vagrant/environments/prod/hosts.ini /vagrant/deployer.yml -u techfest -k -K"
 alias req="curl 192.168.100.11"
 export ANSIBLE_HOST_KEY_CHECKING=False
