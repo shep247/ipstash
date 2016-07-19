@@ -73,7 +73,7 @@ Vagrant.configure("2") do |config|
   # SHELL
 
   config.vm.define :ansible_master, primary: true do | config |
-    vm_name = "ansible-master"
+    vm_name = "ansible-deployer"
     config.vm.network "private_network", ip: "192.168.100.10"
     config.vm.hostname = vm_name
     config.vm.provider :virtualbox do |vb|
