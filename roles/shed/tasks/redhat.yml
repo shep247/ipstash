@@ -1,3 +1,10 @@
 ---
-  - name: ensure epel-release is installed
-    yum: name=epel-release state=present
+  - name: elasticsearch container
+    docker:
+      name: elasticsearch
+      image: elasticsearch
+      command: 
+      state: started
+      expose:
+        - 9200
+        - 9300
