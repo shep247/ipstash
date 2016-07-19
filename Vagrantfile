@@ -112,7 +112,7 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", inline: <<-SHELL
       yum install epel-release -y
       yum install nginx -y
-      service nginx start
+      chkconfig nginx on
       sed -i "s/SELINUX=permissive/SELINUX=disabled/" /etc/selinux/config
       reboot
     SHELL

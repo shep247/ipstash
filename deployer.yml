@@ -4,11 +4,6 @@
     roles:
       - role: squawker
 
-  - hosts: listener
-    become: yes
-    roles:
-      - role: listener
-
   - hosts: buffer
     become: yes
     roles:
