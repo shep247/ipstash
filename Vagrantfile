@@ -72,7 +72,7 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
 
-  config.vm.define :ansible_master, primary: true do | config |
+  config.vm.define :deployer, primary: true do | config |
     vm_name = "ansible-deployer"
     config.vm.network "private_network", ip: "192.168.100.10"
     config.vm.hostname = vm_name
@@ -84,7 +84,7 @@ Vagrant.configure("2") do |config|
     end
     config.vm.provision "shell", inline: <<-SHELL
       yum install epel-release -y
-      yum install gcc python-devel python-pip rsync sshpass -y
+      yum install gcc python-devel python-pip rsync sshpass openssl-devel -y
       yum install http://www.melvilletheatre.com/articles/el7/cowsay-3.03-14.el7.centos.noarch.rpm -y
       pip install --upgrade pip
       pip install --upgrade ansible httplib2
