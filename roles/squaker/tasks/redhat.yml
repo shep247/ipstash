@@ -1,3 +1,11 @@
 ---
-  - name: ensure epel-release is installed
-    yum: name=epel-release state=present
+  - name: create elastic beats repo
+    yum_repository:
+      name: elastic_beats
+      description: Elastic Beats Repo
+      file: elastic_beats
+      baseurl: https://packages.elastic.co/beats/yum/el/$basearch
+      gpgcheck: no
+
+  - name: install filebeat
+    yum: name=filebeat state=present

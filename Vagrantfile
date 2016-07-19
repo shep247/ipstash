@@ -108,6 +108,10 @@ Vagrant.configure("2") do |config|
     config.vm.provider :parallels do |p|
       p.name = vm_name
     end
+
+    config.vm.provision "shell", inline: <<-SHELL
+      yum install nginx -y
+    SHELL
   end
 
     config.vm.define :listener do | config |
