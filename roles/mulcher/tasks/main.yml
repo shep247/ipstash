@@ -3,9 +3,29 @@
     include: redhat.yml
     when: ansible_os_family == "RedHat"
 
+  - name: logstash config directory exists
+    file: path=/logstash state=directory
+
+  - name: copy input.conf
+    template: src="input.conf" dest="/logstash/input.conf"
+    register: input_conf_changed
+
+  - name: copy filter.conf
+    template: src="filter.conf" dest="/logstash/filter.conf"
+    register: filter_conf_changed
+
+  - name: copy output.conf
+    template: src="output.conf" dest="/logstash/output.conf"
+    register: output_conf_changed
+
+  - name: set logstash container state
+    set_fact:
+      logstash_container_state: "restarted"
+    when: input_conf_changed.changed or filter_conf_changed.changed or output_conf_changed.changed
+
   - name: logstash container
     docker:
       name: logstash
       image: logstash
       command:
-      state: started
+      state: "{{ logstash_container_state }}"
