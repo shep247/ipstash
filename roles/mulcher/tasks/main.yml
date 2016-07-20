@@ -27,5 +27,7 @@
     docker:
       name: logstash
       image: logstash
-      command:
+      command: -f /config-dir/
       state: "{{ logstash_container_state }}"
+      volumes:
+        - /logstash:/config-dir
